@@ -1,10 +1,28 @@
 #to do: array with value for each knob, check if changed, print k_X like for b_x and delta
-val_old = rotary_controller[0].value()
+val_old=[None]*len(rotary_controller)
+val_new=[None]*len(rotary_controller)
+button_val_old=[None]*len(button_controller)
+button_val_new=[None]*len(button_controller)
+
+for i in range(0,len(rotary_controller)):
+    val_old[i] = rotary_controller[i].value()
+for i in range(0,len(button_controller)):
+    button_val_old[i] = button_controller[i].value()
+print("coucou")
 while True:
-    val_new = rotary_controller[0].value()
+    for i in range(0,len(rotary_controller)):
+        val_new[i] = rotary_controller[i].value()
 
-    if val_old != val_new:
-        val_old = val_new
-        print('k_0:', val_new-val_old)
+        if val_old[i] != val_new[i]:
+            print('k_'+str(i),':', val_new[i]-val_old[i])
+            val_old[i] = val_new[i]
+        time.sleep_ms(10)
 
-    time.sleep_ms(10)
+    for i in range(0,len(button_controller)):
+        button_val_new[i] = button_controller[i].value()
+        if button_val_old[i] - button_val_new[i] == 1:
+            print('b_'+str(i),'pressed')
+        if button_val_old[i] - button_val_new[i] == -1:
+            print('b_'+str(i),'released')
+        button_val_old[i] = button_val_new[i]
+        time.sleep_ms(10)
