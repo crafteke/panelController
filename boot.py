@@ -7,7 +7,7 @@ print("Booting...")
 #SV1 : [0,2],[4,6],[1,3],[5,7]
 #SV2 : [8,10],[12,14],[8,11],[13,15] (actually unused for now and maybe for ever)
 #SV4 : [17,19],[21,/],[18,20],[22,/]
-#SV3 : [8,10,12,14,9,11,13,15,16]
+#SV3 : [8,10,12,14,16,9,11,13,15]
 
 rotary_pins = [[0,2],[4,6],[1,3],[5,7],[17,19],[18,20]] #format [DT,CLK,SW] (pour l'instant [DT,CLK])
 rotary_controller=[None]*len(rotary_pins)

@@ -16,7 +16,6 @@ while True:
         if val_old[i] != val_new[i]:
             print('k_'+str(i),':', val_new[i]-val_old[i])
             val_old[i] = val_new[i]
-        time.sleep_ms(10)
 
     for i in range(0,len(button_controller)):
         button_val_new[i] = button_controller[i].value()
@@ -25,4 +24,4 @@ while True:
         if button_val_old[i] - button_val_new[i] == -1:
             print('b_'+str(i),'released')
         button_val_old[i] = button_val_new[i]
-        time.sleep_ms(10)
+    time.sleep_ms(10)
