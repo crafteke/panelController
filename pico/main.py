@@ -13,9 +13,8 @@ for i in range(0,len(button_controller)):
 while True:
     for i in range(0,len(rotary_controller)):
         val_new[i] = rotary_controller[i].value()
-
         if val_old[i] != val_new[i]:
-            print(CONTROLLER_ID+'knob_'+str(i)+':'+val_new[i]-val_old[i])
+            print(CONTROLLER_ID+'knob_'+str(i)+':'+str(val_new[i]-val_old[i]))
             val_old[i] = val_new[i]
 
     for i in range(0,len(button_controller)):

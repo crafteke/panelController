@@ -4,20 +4,29 @@ import time
 from machine import Pin, ADC
 print("Booting...")
 
-#CONTROLLER_ID="#A>"
-CONTROLLER_ID="#B>"
 
+# def debug_mapping(a,b):
+#     print("DEBUG_PIN:-",b)
+#
+# for i in range(0,28):
+#     pin = Pin(i,Pin.IN,Pin.PULL_UP)
+#     pin.irq(trigger=(Pin.IRQ_RISING | Pin.IRQ_FALLING),handler=lambda a,b=i: debug_mapping(a,b))
+#
+# time.sleep(600)
+
+#CONTROLLER_ID="#A>"
 #SV1 : [0,2],[4,6],[1,3],[5,7]
 #SV2 : [8,10],[12,14],[8,11],[13,15] (actually unused for now and maybe for ever)
 #SV4 : [17,19],[21,/],[18,20],[22,/]
 #SV3 : [8,10,12,14,16,9,11,13,15]
 #MAPPING CAISSON GAUCHE
 
-
-rotary_pins = [[8,10],[0,2],[4,6],[1,3],[5,7]] #format [DT,CLK,SW] (pour l'instant [DT,CLK])
+CONTROLLER_ID="#B>"
+rotary_pins = [[8,10],[0,2],[4,6],[1,3]] #format [DT,CLK,SW] (pour l'instant [DT,CLK])
 rotary_controller=[None]*len(rotary_pins)
 
-button_pins=[10,12,14,16,9,13,15,21,22]
+button_pins=[14,12,13,15,7,5,9,11]
+
 button_controller=[None]*len(button_pins)
 
 #MAPPING CAISSON DROIT
@@ -51,3 +60,8 @@ for i in range(0,len(rotary_pins)):
 for i in range(0,len(button_pins)):
     button_controller[i] = Pin(button_pins[i],Pin.IN,Pin.PULL_UP)
     #pin.irq(trigger=(Pin.IRQ_RISING | Pin.IRQ_FALLING),handler=lambda a,b=i: button_handler(a,b))
+
+for i in range(0,len(button_pins)):
+    button_controller[i] = Pin(button_pins[i],Pin.IN,Pin.PULL_UP)
+    #pin.irq(trigger=(Pin.IRQ_RISING | Pin.IRQ_FALLING),handler=lambda a,b=i: button_handler(a,b))
+print("Done.")
