@@ -5,36 +5,32 @@ from machine import Pin, ADC
 print("Booting...")
 
 
-# def debug_mapping(a,b):
-#     print("DEBUG_PIN:-",b)
-#
-# for i in range(0,28):
-#     pin = Pin(i,Pin.IN,Pin.PULL_UP)
-#     pin.irq(trigger=(Pin.IRQ_RISING | Pin.IRQ_FALLING),handler=lambda a,b=i: debug_mapping(a,b))
-#
-# time.sleep(600)
+def debug_mapping(a,b):
+    print("DEBUG_PIN:-",b,)
 
-#CONTROLLER_ID="#A>"
-#SV1 : [0,2],[4,6],[1,3],[5,7]
-#SV2 : [8,10],[12,14],[8,11],[13,15] (actually unused for now and maybe for ever)
-#SV4 : [17,19],[21,/],[18,20],[22,/]
-#SV3 : [8,10,12,14,16,9,11,13,15]
+for i in range(0,22):
+    pin = Pin(i,Pin.IN,Pin.PULL_UP)
+    pin.irq(trigger=(Pin.IRQ_RISING | Pin.IRQ_FALLING),handler=lambda a,b=i: debug_mapping(a,b))
+
+time.sleep(6000)
+
 #MAPPING CAISSON GAUCHE
-
-CONTROLLER_ID="#B>"
-rotary_pins = [[8,10],[0,2],[4,6],[1,3]] #format [DT,CLK,SW] (pour l'instant [DT,CLK])
-rotary_controller=[None]*len(rotary_pins)
-
-button_pins=[14,12,13,15,7,5,9,11]
-
-button_controller=[None]*len(button_pins)
-
-#MAPPING CAISSON DROIT
-# rotary_pins = [[0,2],[4,6],[1,3],[5,7],[17,19],[18,20]] #format [DT,CLK,SW] (pour l'instant [DT,CLK])
+#
+# CONTROLLER_ID="#B>"
+# rotary_pins = [[8,10],[0,2],[4,6],[1,3]] #format [DT,CLK,SW] (pour l'instant [DT,CLK])
 # rotary_controller=[None]*len(rotary_pins)
 #
-# button_pins=[8,10,12,14,16,9,11,13,15,21,22]
+# button_pins=[14,12,13,15,7,5,9,11]
+#
 # button_controller=[None]*len(button_pins)
+
+#MAPPING CAISSON DROIT
+CONTROLLER_ID="#A>"
+rotary_pins = [[0,2],[4,6],[1,3],[5,7],[17,19],[18,20]] #format [DT,CLK,SW] (pour l'instant [DT,CLK])
+rotary_controller=[None]*len(rotary_pins)
+
+button_pins=[8,10,12,14,16,9,11,13,15,21,22]
+button_controller=[None]*len(button_pins)
 
 ADC_objs=[machine.ADC(26),machine.ADC(27),machine.ADC(28)]
 def read_adc(index):

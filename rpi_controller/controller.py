@@ -3,13 +3,13 @@ import time
 from signal import signal, SIGINT
 from sys import exit
 import socketio
-import serial
+import serial #pip3 install serial
 import os
 
 SIO_SERVER='http://face6core.local:4567'
 
 sio = socketio.Client()
-serials=None
+serials=[None]*2
 
 # correct_tags=["0415911acdc826","0415917a9b5728","0415910a76d926","0415910a66c326","0415918a11ac28","0415911a2ce826"]
 # GPIO.setmode(GPIO.BCM)
@@ -63,21 +63,17 @@ def main():
             if(serials[i]!= None and serials[i].in_waiting):
                 data=serials[i].readline()
                 data=data.decode("utf-8").strip()
-                print("Received command:",data)
                 msg={}
                 if(data[0]=='#' and data[2]=='>'):
                     pico_id=data[1]
                 serial_msg=data[3:].split(':')
-                if(pico_id in ["A","B"]): #ignore firmware dumping from arduino
-                    msg["controller_id"]= rfid_id+':'+serial_msg[0]
+                if(pico_id in ["A","B"]):
+                    msg["controller_id"]= 'ac_'+pico_id+'_'+serial_msg[0]
                     msg['value']=serial_msg[1]
-                    rfid=serial_msg[1]
                     if sio.connected:
                         sio.emit('Command',msg)
         time.sleep(0.1)
 
-def requestRefresh():
-    serials.write(1)
 def handler(signal_received, frame):
     # Handle any cleanup here
     print('SIGINT or CTRL-C detected. Exiting gracefully')
