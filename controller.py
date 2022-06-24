@@ -62,6 +62,7 @@ def main():
         for i in range(0,2):
             if(serials[i]!= None and serials[i].in_waiting):
                 data=serials[i].readline()
+                print("Received from",serials[i].port,':',data)
                 data=data.decode("utf-8").strip()
                 msg={}
                 if(data[0]=='#' and data[2]=='>'):
