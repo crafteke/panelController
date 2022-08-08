@@ -37,4 +37,4 @@ while True:
         elif adc_states[i]!=0:
             print(CONTROLLER_ID+"plug_"+str(i)+':0')
             adc_states[i]=0
-    time.sleep_ms(10)
+    #time.sleep_ms(10)
