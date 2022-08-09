@@ -73,7 +73,7 @@ def main():
                     msg['value']=serial_msg[1]
                     if sio.connected:
                         sio.emit('Command',msg)
-        time.sleep(0.1)
+        time.sleep(0.001)
 
 def handler(signal_received, frame):
     # Handle any cleanup here
