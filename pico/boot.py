@@ -6,13 +6,11 @@ print("Booting...")
 
 
 def debug_mapping(a,b):
-    print("DEBUG_PIN:-",b,)
+    print("DEBUG_PIN:-",b,a)
 
 for i in range(0,22):
     pin = Pin(i,Pin.IN,Pin.PULL_UP)
     pin.irq(trigger=(Pin.IRQ_RISING | Pin.IRQ_FALLING),handler=lambda a,b=i: debug_mapping(a,b))
-
-time.sleep(6000)
 
 #MAPPING CAISSON GAUCHE
 #
@@ -57,7 +55,5 @@ for i in range(0,len(button_pins)):
     button_controller[i] = Pin(button_pins[i],Pin.IN,Pin.PULL_UP)
     #pin.irq(trigger=(Pin.IRQ_RISING | Pin.IRQ_FALLING),handler=lambda a,b=i: button_handler(a,b))
 
-for i in range(0,len(button_pins)):
-    button_controller[i] = Pin(button_pins[i],Pin.IN,Pin.PULL_UP)
-    #pin.irq(trigger=(Pin.IRQ_RISING | Pin.IRQ_FALLING),handler=lambda a,b=i: button_handler(a,b))
 print("Done.")
+
