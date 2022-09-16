@@ -1,34 +1,33 @@
 import sys
+import os
 from rotary_irq_rp2 import RotaryIRQ
 import time
 from machine import Pin, ADC
-print("Booting...")
+
+#print("Booting...")
 
 
 def debug_mapping(a,b):
     print("DEBUG_PIN:-",b,a)
 
-for i in range(0,22):
-    pin = Pin(i,Pin.IN,Pin.PULL_UP)
-    pin.irq(trigger=(Pin.IRQ_RISING | Pin.IRQ_FALLING),handler=lambda a,b=i: debug_mapping(a,b))
+# for i in range(0,22):
+#     pin = Pin(i,Pin.IN,Pin.PULL_UP)
+#     pin.irq(trigger=(Pin.IRQ_RISING | Pin.IRQ_FALLING),handler=lambda a,b=i: debug_mapping(a,b))
 
-#MAPPING CAISSON GAUCHE
-#
-# CONTROLLER_ID="#B>"
-# rotary_pins = [[8,10],[0,2],[4,6],[1,3]] #format [DT,CLK,SW] (pour l'instant [DT,CLK])
-# rotary_controller=[None]*len(rotary_pins)
-#
-# button_pins=[14,12,13,15,7,5,9,11]
-#
-# button_controller=[None]*len(button_pins)
-
-#MAPPING CAISSON DROIT
-CONTROLLER_ID="#A>"
-rotary_pins = [[0,2],[4,6],[1,3],[5,7],[17,19],[18,20]] #format [DT,CLK,SW] (pour l'instant [DT,CLK])
-rotary_controller=[None]*len(rotary_pins)
-
-button_pins=[8,10,12,14,16,9,11,13,15,21,22]
-button_controller=[None]*len(button_pins)
+if('B' in os.listdir()):
+    #MAPPING CAISSON GAUCHE
+    CONTROLLER_ID="#B>"
+    rotary_pins = [[8,10],[0,2],[4,6],[1,3]] #format [DT,CLK,SW] (pour l'instant [DT,CLK])
+    rotary_controller=[None]*len(rotary_pins)
+    button_pins=[14,12,13,15,7,5,9,11]
+    button_controller=[None]*len(button_pins)
+elif('A' in os.listdir()):
+    #MAPPING CAISSON DROIT
+    CONTROLLER_ID="#A>"
+    rotary_pins = [[0,2],[4,6],[1,3],[5,7],[17,19],[18,20]] #format [DT,CLK,SW] (pour l'instant [DT,CLK])
+    rotary_controller=[None]*len(rotary_pins)
+    button_pins=[8,10,12,14,16,9,11,13,15,21,22]
+    button_controller=[None]*len(button_pins)
 
 ADC_objs=[machine.ADC(26),machine.ADC(27),machine.ADC(28)]
 def read_adc(index):
@@ -55,5 +54,4 @@ for i in range(0,len(button_pins)):
     button_controller[i] = Pin(button_pins[i],Pin.IN,Pin.PULL_UP)
     #pin.irq(trigger=(Pin.IRQ_RISING | Pin.IRQ_FALLING),handler=lambda a,b=i: button_handler(a,b))
 
-print("Done.")
-
+#print("Done.")
