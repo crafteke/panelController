@@ -65,6 +65,7 @@ def main():
                 # print("Received from",serials[i].port,':',data)
                 data=data.decode("utf-8").strip()
                 msg={}
+                pico_id=''
                 if(data[0]=='#' and data[2]=='>'):
                     pico_id=data[1]
                 serial_msg=data[3:].split(':')
