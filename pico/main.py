@@ -41,10 +41,10 @@ while True:
         elif adc_time[i] > 0:
                 adc_time[i]=adc_time[i]-1
         if adc_time[i]>=20:
-            if adc_states[i]!=1 and adc_value>1.4 and adc_value<1.8:
+            if adc_states[i]==0 and adc_value>1.4 and adc_value<1.8:
                 print(CONTROLLER_ID+"plug_"+str(i)+':1')
                 adc_states[i]=1
-            elif  adc_states[i]!=2 and adc_value>2.4 and adc_value<2.8:
+            elif  adc_states[i]==0 and adc_value>2.4 and adc_value<2.8:
                 print(CONTROLLER_ID+"plug_"+str(i)+':2')
                 adc_states[i]=2
         if adc_time[i] < 10:
