@@ -62,8 +62,10 @@ def main():
         for i in range(0,2):
             if(serials[i]!= None and serials[i].in_waiting):
                 data=serials[i].readline()
+                # print("Received from",serials[i].port,':',data)
                 data=data.decode("utf-8").strip()
                 msg={}
+                pico_id=''
                 if(data[0]=='#' and data[2]=='>'):
                     pico_id=data[1]
                 serial_msg=data[3:].split(':')
@@ -72,7 +74,7 @@ def main():
                     msg['value']=serial_msg[1]
                     if sio.connected:
                         sio.emit('Command',msg)
-        time.sleep(0.1)
+        time.sleep(0.001)
 
 def handler(signal_received, frame):
     # Handle any cleanup here
