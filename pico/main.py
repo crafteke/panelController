@@ -24,7 +24,7 @@ while True:
         if button_val_old[i] - button_val_new[i] == -1:
             print(CONTROLLER_ID+'button_'+str(i)+':0')
         button_val_old[i] = button_val_new[i]
-    for i in range(0,3):
+    for i in range(0,len(ADC_objs)):
         adc_value=read_adc(i)
         if adc_value>0.5:
             if adc_states[i]!=1 and adc_value>1.4 and adc_value<1.8:
