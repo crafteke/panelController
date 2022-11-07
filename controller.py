@@ -6,7 +6,8 @@ import socketio
 import serial #pip3 install serial
 import os
 
-SIO_SERVER='http://face6core.local:4567'
+#SIO_SERVER='http://face6core.local:4567'
+SIO_SERVER='http://10.0.0.241:4567'
 
 sio = socketio.Client()
 serials=[None]*2
