@@ -21,7 +21,6 @@ def NewData(data):
     for x in range(0,min(len(data),len(dmx_values))):
         dmx_values[x]=data[x]
 
-
 def updateElWires():
     for i in range(0,16):
         if(dmx_values[i]==0):
